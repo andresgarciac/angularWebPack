@@ -1,0 +1,71 @@
+
+<!-- /#SAVINGS-->
+
+<div ng-if = "getScopeAttribute(grid.grid).showGrid && getScopeAttribute(grid.grid).availableGrid" class="gridTitle"><br><br><br>{{getScopeAttribute(grid.grid).desc}}<br></div>
+
+  <div  id="grid.gridApi" ui-grid="getScopeAttribute(grid.grid)" ui-grid-auto-resize ui-grid-pagination ui-grid-move-columns ng-if = "getScopeAttribute(grid.grid).showGrid && getScopeAttribute(grid.grid).availableGrid && getScopeAttribute(grid.grid).displayGrid" ng-style="{height: (getScopeAttribute(grid.grid).gridStyle)+'px'}">
+  </div>
+<!--<div ui-grid-footer class="ng-scope"></div>-->
+
+<!-- /#footerSavingsTable-->
+
+  <div id="footerTable" ng-if = "getScopeAttribute(grid.grid).showGrid && getScopeAttribute(grid.grid).availableGrid">
+    <div class="btn_filter">
+        <a ng-click="showModal(grid.grid)"><span class="ui-icon ui-icon-newwin"></span>{{labelsMap['SHOW-HIDE-COLUMNS']}}</a>
+    </div>
+    <div class="btn_filter">
+        <a ng-click="enableFiltering(grid.grid,grid.gridApi)"><span class="ui-icon ui-icon-search"></span> {{labelsMap.FILTER}}</a>
+    </div>
+
+    <div class="btn_2">
+      <a class="btn btn-success" ng-click="getScopeAttribute(grid.gridApi).pagination.nextPage()">
+        <span class="ui-icon ui-icon-seek-next"></span>
+      </a>
+      <a class="btn btn-success" ng-click="getScopeAttribute(grid.gridApi).pagination.seek(getScopeAttribute(grid.gridApi).pagination.getTotalPages())">
+        <span class="ui-icon ui-icon-seek-end"></span>
+      </a>
+    </div>
+
+    <div class="btn_center">{{labelsMap.PAGE}} {{ getScopeAttribute(grid.gridApi).pagination.getPage() }} - {{ getScopeAttribute(grid.gridApi).pagination.getTotalPages() }}</div>
+
+    <div class="btn_1">
+      <a class="btn btn-success" ng-click="getScopeAttribute(grid.gridApi).pagination.seek(1)">
+        <span class="ui-icon ui-icon-seek-first"></span>
+      </a>
+      <a class="btn btn-success" ng-click="getScopeAttribute(grid.gridApi).pagination.previousPage()">
+        <span class="ui-icon ui-icon-seek-prev"></span>
+      </a>
+    </div>
+
+  </div><!-- /#footerSavingsTable-->
+
+<div ng-show="getScopeAttribute(grid.grid).displayModal" id="openModal" class="modalDialog">
+<div class="ui-widget-header">
+<div class="titModal">{{labelsMap['SHOW-HIDE-COLUMNS']}} 
+<a ng-click="showModal(grid.grid)" class="closex">
+<i class="ui-button-icon-primary ui-icon ui-icon-closethick"></i>
+</a>
+</div>
+<div class="cont">
+<div class="container">
+<div class="btns">
+  <div class="caja"><a ng-click = "hideAllColumns(grid.grid,grid.gridApi)">{{labelsMap['REMOVE-ALL']}}</a></div>
+</div>
+    <ul id="gallery"  >
+        <li ng-if="column.visible" ng-repeat="column in getScopeAttribute(grid.grid).columnDefs track by $index"><span class="fl">{{column.displayName}}</span><a href="#" ng-click="setColumns(grid.grid,grid.gridApi,column)" title=""><span class="ui-corner-all ui-icon ui-icon-minus"></span></a></li>
+    </ul>
+</div>
+
+<div class="container">
+<div class="btns">
+  <div class="caja"><a ng-click = "showAllColumns(grid.grid,grid.gridApi)">{{labelsMap['ADD-ALL']}}</a></div>
+</div>
+    <ul id="gallery2"  >
+        <li ng-if="!column.visible && !(column.field === 'ID_COUNTRY') && !(column.field === 'ID') && !(column.field === '_AVAILABLE_BALANCE') && !(column.field === '_TOTAL_BALANCE')" ng-repeat="column in getScopeAttribute(grid.grid).columnDefs track by $index"><span class="fl">{{column.displayName}}</span><a href="#" ng-click="setColumns(grid.grid,grid.gridApi,column)" title="remove this dvd"><span class="ui-corner-all ui-icon ui-icon-plus"></span></a></li>
+    </ul>
+</div>
+</div>
+<hr>
+<a ng-click="showModal(grid.grid)" class="btn">{{labelsMap.CLOSE}}</a>
+</div>
+</div>

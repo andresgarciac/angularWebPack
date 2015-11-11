@@ -1,0 +1,67 @@
+
+<div class="marketing">
+  <h4>{{labelsMap['CONSOLIDATE-BALANCES-TITLE']}}</h4>
+  <div todo1-errors show="showError" message="errorMessage" level="levelMessage"></div>
+  
+    <div class="row-fluid">
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="form-group">
+        <label for="subject"> {{labelsMap['PRODUCT-TYPE']}}</label> 
+
+                 <select id="listaTipoProductos" class="form-control"  ng-change="updateTable()" ng-model="productValue" ng-options="product.code as product.description for product in products">
+                     <option value="" >{{labelsMap.ALL}}</option>
+                 </select>
+        </div>
+      </div>
+      
+      <div class="col-xs-6 col-sm-6 col-md-6">
+        <div class="form-group">
+
+          <label for="subject"> {{labelsMap.CURRENCY}}</label> 
+                <select id="listaMonedas" class="form-control" ng-change="updateTable()" ng-model="currencyValue" ng-options="currencies for currencies in currencies">
+                  <option value="" >{{labelsMap.ALL}}</option>
+                </select>
+        </div>
+      </div>
+    </div>
+    <br>
+
+<!--<img src="/resources/images/page-loader.gif" ng-if="loadingGrids" style="text-align:center;">-->
+  <div class="loader" ng-if="loadingGrids" >{{labelsMap.LOADING}}</div>
+<div ng-repeat="grid in gridsObject">
+<div class="gridTitle">{{getScopeAttribute(grid.grid).desc}}</div>
+  <div  id="{{grid.grid}}" ui-grid="getScopeAttribute(grid.grid)" ui-grid-auto-resize ui-grid-pagination ui-grid-move-columns ng-if = "getScopeAttribute(grid.grid).showGrid" ng-style="{height: (getScopeAttribute(grid.grid).gridStyle)+'px'}"></div>
+
+  <!-- ng-style="{height: (gridOptions.data.length*30)+70+'px'}"-->
+
+  <div id="footerTable" >
+    <div class="btn_filter">
+        <a ng-click="enableFiltering(grid.grid,grid.gridApi)"><span class="ui-icon ui-icon-search"></span> {{labelsMap.FILTER}}</a>
+    </div>
+
+    <div class="btn_2">
+      <a class="btn btn-success" ng-click="getScopeAttribute(grid.gridApi).pagination.nextPage()">
+        <span class="ui-icon ui-icon-seek-next"></span>
+      </a>
+      <a class="btn btn-success" ng-click="getScopeAttribute(grid.gridApi).pagination.seek(getScopeAttribute(grid.gridApi).pagination.getTotalPages())">
+        <span class="ui-icon ui-icon-seek-end"></span>
+      </a>
+    </div>
+
+    <div class="btn_center">{{labelsMap.PAGE}} {{ getScopeAttribute(grid.gridApi).pagination.getPage() }} - {{ getScopeAttribute(grid.gridApi).pagination.getTotalPages() }}</div>
+
+    <div class="btn_1">
+      <a class="btn btn-success" ng-click="getScopeAttribute(grid.gridApi).pagination.seek(1)">
+        <span class="ui-icon ui-icon-seek-first"></span>
+      </a>
+      <a class="btn btn-success" ng-click="getScopeAttribute(grid.gridApi).pagination.previousPage()">
+        <span class="ui-icon ui-icon-seek-prev"></span>
+      </a>
+    </div>
+
+  </div><!-- /#footerTable-->
+</div>
+</div>
+
+
+

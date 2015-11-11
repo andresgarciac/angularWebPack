@@ -1,0 +1,18 @@
+<div ng-if="show && error()" class="alert alert-danger" id="div-error" style="">
+        <button ng-click="closeMessage();" type="button" class="close" aria-hidden="true">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <div class="alertext" id="div-error-msg">{{message}}<br></div>
+</div>
+<div ng-if="show && warn()" class="alert alert-success" id="div-suc" style="">
+		<button ng-click="closeMessage();" type="button" class="close" data-dismiss="alert" aria-hidden="true">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+		<div class="alertext" id="div-suc-msg">{{message}}</div>
+</div>
+<div ng-if="show && info()" class="alert alert-info" id="div-info" style="">
+	<button ng-click="closeMessage();" type="button" class="close" data-dismiss="alert" aria-hidden="true">
+		<span class="glyphicon glyphicon-remove"></span>
+	</button>
+	<div class="alertext" id="div-info-msg">{{message}}</div>
+</div>
